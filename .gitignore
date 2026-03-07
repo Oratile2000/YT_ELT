@@ -1,5 +1,5 @@
 venv/
-
+.venv/
 #Venv cannot be pushed into git, so we ignore it. It is a folder that contains all the dependencies for the project, and it can be recreated by running pip install -r requirements.txt
 #So saving it in here provides a way to keep the repository clean and avoid pushing unnecessary files into github when we commit changes.
 #So venv is a common name for the virtual environment folder, but it can be named differently depending on the project.
@@ -7,4 +7,4 @@ venv/
 #It is also not necessary to push it because it can be easily recreated by running pip install -r requirements.txt, which will install all the dependencies for the project.
 
 
-_pycache__/
+_pycache__/ 
