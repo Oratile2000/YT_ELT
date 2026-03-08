@@ -6,5 +6,5 @@ venv/
 #Venv must not be pushed into git because it can contain a lot of files and it can cause conflicts when multiple people are working on the same project. 
 #It is also not necessary to push it because it can be easily recreated by running pip install -r requirements.txt, which will install all the dependencies for the project.
 
-
+.env
 _pycache__/ 

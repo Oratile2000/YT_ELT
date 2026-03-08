@@ -1,36 +1,43 @@
 import requests
+import json
+
+import os 
+from dotenv import load_dotenv
+
+load_dotenv(dotenv_path="./.env")
+
+API_KEY = os.getenv("API_KEY")
+
+CHANNEL_ID = "MrBeast"  
+
+def get_playlist_id():
+    try:
+        url = f"https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails&forHandle={CHANNEL_ID}&key={API_KEY}"
+
+        response = requests.get(url)
+        response.raise_for_status()
+
+        data = response.json()
+
+        dataJ = json.dumps(data, indent=4)
+
+        #print(dataJ)
+        
+        channel_items = data["items"][0]
+        channel_playlistId = channel_items["contentDetails"]["relatedPlaylists"]["uploads"] 
+
+        #print(channel_playlistId)
+        return channel_playlistId
+
+    except requests.exceptions.RequestException as e:
+        raise e
+        #print(f"An error occurred: {e}")
+      
+
+if __name__ == "__main__":
+    print(get_playlist_id())
 
 
-#Global variable for the API key, which is used to authenticate requests to the YouTube Data API. 
-API_KEY = "AIzaSyCUfZpT7phJDvRMtQwVgwbAgOk4tzkV9UU"
-CHANNEL_ID = "MrBeast"  # MrBeast's channel ID
-
-#Set the url to the YouTube Data API endpoint for retrieving video statistics, including the video ID and the part parameter set to statistics. Then, make a GET request to the API and return the response as a JSON object.
-#Set the url value
-url = f"https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails&forHandle={CHANNEL_ID}&key={API_KEY}"
-
-response = requests.get(url)
-print(response.json())  # Print the response as a JSON object
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-##Get data from the API and print the response as a JSON object. Using video ID "dQw4w9WgXcQ" as an example to test the function.
-# def get_video_stats(video_id):
-#     url = f"https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id={video_id}&key={API_KEY}"
-#     response = requests.get(url)
-#     return response.json()
-
-#print(get_video_stats("dQw4w9WgXcQ"))   Example video ID for testing
